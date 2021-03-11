@@ -10,7 +10,7 @@ use super::image::Image;
 use super::page::Page;
 use super::track::SimplifiedTrack;
 use super::Restriction;
-use crate::model::{AlbumType, Copyright, DatePrecision, Type};
+use crate::model::{AlbumType, Copyright, DatePrecision, Type, idtypes};
 
 /// Simplified Album Object
 ///
@@ -35,7 +35,8 @@ pub struct SimplifiedAlbum {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub restrictions: Option<Restriction>,
     #[serde(rename = "type")]
-    pub _type: Type,
+    #[serde(default)]
+    pub _type: idtypes::AlbumType,
     pub uri: Option<String>,
 }
 
@@ -60,7 +61,8 @@ pub struct FullAlbum {
     pub release_date_precision: DatePrecision,
     pub tracks: Page<SimplifiedTrack>,
     #[serde(rename = "type")]
-    pub _type: Type,
+    #[serde(default)]
+    pub _type: idtypes::AlbumType,
     pub uri: String,
 }
 

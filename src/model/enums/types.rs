@@ -42,7 +42,7 @@ pub enum Type {
     Episode,
 }
 
-/// Additional typs: `track`, `episode`
+/// Additional types: `track`, `episode`
 ///
 /// [Reference](https://developer.spotify.com/documentation/web-api/reference/player/get-information-about-the-users-current-playback/)
 #[derive(Clone, Serialize, Deserialize, Copy, PartialEq, Eq, Debug, ToString)]

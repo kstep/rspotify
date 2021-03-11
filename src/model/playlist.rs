@@ -7,7 +7,7 @@ use std::collections::HashMap;
 use super::image::Image;
 use super::page::Page;
 use super::user::PublicUser;
-use crate::model::{Followers, PlayableItem, Type};
+use crate::model::{Followers, PlayableItem, Type, idtypes};
 
 /// Playlist result object
 ///
@@ -42,7 +42,8 @@ pub struct SimplifiedPlaylist {
     pub snapshot_id: String,
     pub tracks: PlaylistTracksRef,
     #[serde(rename = "type")]
-    pub _type: Type,
+    #[serde(default)]
+    pub _type: idtypes::PlaylistType,
     pub uri: String,
 }
 
@@ -64,7 +65,8 @@ pub struct FullPlaylist {
     pub snapshot_id: String,
     pub tracks: Page<PlaylistItem>,
     #[serde(rename = "type")]
-    pub _type: Type,
+    #[serde(default)]
+    pub _type: idtypes::PlaylistType,
     pub uri: String,
 }
 

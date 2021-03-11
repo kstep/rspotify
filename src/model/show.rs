@@ -1,6 +1,6 @@
 use super::image::Image;
 use super::page::Page;
-use crate::model::{duration_ms, CopyrightType, DatePrecision};
+use crate::model::{duration_ms, CopyrightType, DatePrecision, idtypes};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::time::Duration;
@@ -34,7 +34,8 @@ pub struct SimplifiedShow {
     pub name: String,
     pub publisher: String,
     #[serde(rename = "type")]
-    pub _type: String,
+    #[serde(default)]
+    pub _type: idtypes::ShowType,
     pub uri: String,
 }
 
@@ -75,7 +76,8 @@ pub struct FullShow {
     pub name: String,
     pub publisher: String,
     #[serde(rename = "type")]
-    pub _type: String,
+    #[serde(default)]
+    pub _type: idtypes::ShowType,
     pub uri: String,
 }
 
@@ -105,7 +107,8 @@ pub struct SimplifiedEpisode {
     pub release_date_precision: DatePrecision,
     pub resume_point: Option<ResumePoint>,
     #[serde(rename = "type")]
-    pub _type: String,
+    #[serde(default)]
+    pub _type: idtypes::EpisodeType,
     pub uri: String,
 }
 
@@ -135,7 +138,8 @@ pub struct FullEpisode {
     pub resume_point: Option<ResumePoint>,
     pub show: SimplifiedShow,
     #[serde(rename = "type")]
-    pub _type: String,
+    #[serde(default)]
+    pub _type: idtypes::EpisodeType,
     pub uri: String,
 }
 

@@ -8,7 +8,7 @@ use std::{collections::HashMap, time::Duration};
 use super::album::SimplifiedAlbum;
 use super::artist::SimplifiedArtist;
 use super::Restriction;
-use crate::model::{duration_ms, TrackId, Type};
+use crate::model::{duration_ms, TrackId, Type, idtypes};
 
 /// Full track object
 ///
@@ -39,7 +39,8 @@ pub struct FullTrack {
     pub preview_url: Option<String>,
     pub track_number: u32,
     #[serde(rename = "type")]
-    pub _type: Type,
+    #[serde(default)]
+    pub _type: idtypes::TrackType,
     pub uri: String,
 }
 
@@ -90,7 +91,8 @@ pub struct SimplifiedTrack {
     pub preview_url: Option<String>,
     pub track_number: u32,
     #[serde(rename = "type")]
-    pub _type: Type,
+    #[serde(default)]
+    pub _type: idtypes::TrackType,
     pub uri: String,
 }
 

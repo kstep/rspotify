@@ -1,5 +1,5 @@
 use crate::model::Type;
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, Serializer};
 use std::borrow::Borrow;
 use std::marker::PhantomData;
 use std::ops::Deref;
@@ -32,11 +32,26 @@ macro_rules! sealed_types {
             impl IdType for $name {
                 const TYPE: Type = Type::$name;
             }
+
+            impl Serialize for $name {
+                fn serialize<S>(&self, serializer: S) -> Result<<S as Serializer>::Ok, <S as Serializer>::Error> where
+                    S: Serializer {
+                    Type::$name.serialize(serializer)
+                }
+            }
         )+
     }
 }
 
 sealed_types!(Artist, Album, Track, Playlist, User, Show, Episode);
+
+pub type ArtistType = PhantomData<Artist>;
+pub type AlbumType = PhantomData<Album>;
+pub type TrackType = PhantomData<Track>;
+pub type PlaylistType = PhantomData<Playlist>;
+pub type UserType = PhantomData<User>;
+pub type ShowType = PhantomData<Show>;
+pub type EpisodeType = PhantomData<Episode>;
 
 impl PlayContextIdType for Artist {}
 impl PlayContextIdType for Album {}
